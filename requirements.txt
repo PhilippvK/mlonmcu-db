@@ -1,0 +1,7 @@
+pandas
+sqlalchemy
+rich
+boto3
+psycopg2-binary
+fsspec
+s3fs

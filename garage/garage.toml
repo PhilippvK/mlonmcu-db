@@ -1,0 +1,49 @@
+metadata_dir = "/var/lib/garage/meta"
+data_dir = "/var/lib/garage/data"
+
+db_engine = "lmdb"
+# db_engine = "sqlite"
+
+metadata_auto_snapshot_interval = "6h"
+
+replication_factor = 1
+compression_level = 2
+
+# rpc_bind_outgoing = false
+# rpc_public_addr = "[fc00:1::1]:3901"
+# allow_world_readable_secrets = false
+# bootstrap_peers = [
+#     "563e1ac825ee3323aa441e72c26d1030d6d4414aeb3dd25287c531e7fc2bc95d@[fc00:1::1]:3901",
+#     "86f0f26ae4afbd59aaf9cfb059eefac844951efd5b8caeec0d53f4ed6c85f332@[fc00:1::2]:3901",
+#     "681456ab91350f92242e80a531a3ec9392cb7c974f72640112f90a600d7921a4@[fc00:B::1]:3901",
+#     "212fd62eeaca72c122b45a7f4fa0f55e012aa5e24ac384a72a3016413fa724ff@[fc00:F::1]:3901",
+# ]
+# allow_punycode = false
+
+
+# rpc_bind_addr = "0.0.0.0:3901"
+rpc_bind_addr = "[::]:3901"
+rpc_public_addr = "localhost:3901" # Required
+rpc_secret = "${GARAGE_RPC_SECRET}"
+
+# consistency_mode = "consistent"
+
+[s3_api]
+s3_region = "garage"
+# api_bind_addr = "[::]:3900"
+api_bind_addr = "0.0.0.0:3900"
+root_domain = ".s3.domain.com"
+
+[s3_web] # Optional, if you want to expose bucket as web
+bind_addr = "[::]:3902"
+root_domain = ".web.domain.com"
+index = "index.html"
+
+[admin]
+api_bind_addr = "0.0.0.0:3903"
+admin_token = "YOUR_ADMIN_TOKEN_HERE"
+metrics_token = "YOUR_METRICS_TOKEN_HERE"
+# metrics_token = "BCAdFjoa9G0KJR0WXnHHm7fs1ZAbfpI8iIZ+Z/a2NgI="
+# metrics_require_token = true
+# admin_token = "UkLeGWEvHnXBqnueR3ISEMWpOnm40jH2tM2HnnL/0F4="
+# trace_sink = "http://localhost:4317"
