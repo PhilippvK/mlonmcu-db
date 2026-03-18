@@ -34,12 +34,12 @@ services:
     restart: unless-stopped
     volumes:
       - ./garage/garage.toml:/etc/garage.toml:ro
-    ports:
-      - "3909:3909"
+    env_file: .env
     environment:
       API_BASE_URL: "http://garage:3903"
       S3_ENDPOINT_URL: "http://garage:3900"
-      AUTH_USER_PASS: "username:$2y$10$DSTi9o..."
+    ports:
+      - "3909:3909"
 
 volumes:
   postgres-data:
