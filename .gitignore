@@ -3,3 +3,5 @@ venv*/
 data/
 meta/
 downloads/
+__pycache__/
+.pytest_cache/

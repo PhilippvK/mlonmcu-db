@@ -1,5 +1,27 @@
 # version: "3.9"
 services:
+  explorer:
+    profiles: [explorer]
+    build:
+      context: .
+      dockerfile: webapp/Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      S3_ENDPOINT: http://garage:3900
+    ports:
+      - "127.0.0.1:${EXPLORER_PORT:-8080}:8080"
+    depends_on:
+      - postgres
+      - garage
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/healthz')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
   postgres:
     image: postgres:16
     container_name: mlonmcu-db-postgres
